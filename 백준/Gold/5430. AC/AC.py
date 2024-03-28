@@ -35,14 +35,8 @@ for _ in range(T):
             temp = answer
             temp.reverse()
             answer = temp
-            for j in range(len(answer)):
-                if j == len(answer)-1:
-                    print(answer[j],']', sep='')
-                else:
-                    print(answer[j],',', sep='', end='')
-        else:
-            for j in range(len(answer)):
-                if j == len(answer)-1:
-                    print(answer[j],']', sep='')
-                else:
-                    print(answer[j],',', sep='', end='')
+        for j in range(len(answer)):
+            if j == len(answer)-1:
+                print(answer[j],']', sep='')
+            else:
+                print(answer[j],',', sep='', end='')
