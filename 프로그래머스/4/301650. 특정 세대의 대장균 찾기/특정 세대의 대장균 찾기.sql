@@ -1,0 +1,23 @@
+-- 코드를 작성해주세요
+WITH RECURSIVE CTE AS
+    (
+    SELECT
+        ID, PARENT_ID, 1 AS DEPTH
+    FROM
+        ECOLI_DATA
+    WHERE
+        PARENT_ID IS NULL
+    UNION ALL
+    SELECT
+        C.ID, C.PARENT_ID, CTE.DEPTH + 1
+    FROM ECOLI_DATA C
+    INNER JOIN CTE ON C.PARENT_ID = CTE.ID
+    )
+SELECT
+    ID
+FROM
+    CTE
+WHERE
+    DEPTH = 3
+ORDER BY
+    ID
