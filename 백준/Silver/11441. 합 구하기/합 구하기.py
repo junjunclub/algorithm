@@ -1,6 +1,6 @@
 N = int(input())
 lst = list(map(int, input().split()))
-sum_lst = []
+sum_lst = [0]
 temp = 0
 for i in range(N):
     temp += lst[i]
@@ -9,7 +9,4 @@ for i in range(N):
 M = int(input())
 for _ in range(M):
     s, e = map(int, input().split())
-    if s == 1:
-        print(sum_lst[e-1])
-    else:
-        print(sum_lst[e-1]-sum_lst[s-2])
+    print(sum_lst[e]-sum_lst[s-1])
