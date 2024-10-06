@@ -9,6 +9,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s = br.readLine();
         String[] sList = new String[s.length()];
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < s.length(); i++) {
             sList[i] = s.substring(i);
@@ -17,7 +18,9 @@ public class Main {
         Arrays.sort(sList);
 
         for (int i = 0; i < s.length(); i++) {
-            System.out.println(sList[i]);
+            sb.append(sList[i]).append("\n");
         }
+
+        System.out.println(sb);
     }
 }
