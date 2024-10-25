@@ -8,8 +8,8 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+        long n = Long.parseLong(st.nextToken());
+        long m = Long.parseLong(st.nextToken());
 
         System.out.println((n+m)*(n-m));
     }
