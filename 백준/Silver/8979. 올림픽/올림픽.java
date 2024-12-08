@@ -17,7 +17,7 @@ public class Main {
             int gold = Integer.parseInt(st.nextToken());
             int silver = Integer.parseInt(st.nextToken());
             int bronze = Integer.parseInt(st.nextToken());
-            list.add(new Country(id, gold, silver, bronze));
+            list.add(new Country(id, gold, silver, bronze, 0));
         }
 
         Collections.sort(list, new Comparator<Country>() {
@@ -33,26 +33,30 @@ public class Main {
             }
         });
 
-        int grade = 1;
-
+        list.get(0).rank = 1;
+        
+        int idx = 0;
+        
         for (int i = 1; i < n; i++) {
             if (list.get(i).gold != list.get(i-1).gold || list.get(i).silver != list.get(i-1).silver || list.get(i).bronze != list.get(i-1).bronze) {
-                grade += 1;
+                list.get(i).rank = list.get(i-1).rank + 1;
             }
             if (list.get(i).id == m) {
-                System.out.println(grade);
-                break;
+                idx = i;
             }
         }
+
+        System.out.println(list.get(idx).rank);
     }
 }
 
 class Country {
-    int id,gold,silver,bronze;
-    public Country(int id, int gold, int silver, int bronze) {
+    int id,gold,silver,bronze, rank;
+    public Country(int id, int gold, int silver, int bronze, int rank) {
         this.id = id;
         this.gold = gold;
         this.silver = silver;
         this.bronze = bronze;
+        this.rank = rank;
     }
 }
