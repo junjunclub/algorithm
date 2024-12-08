@@ -20,39 +20,28 @@ public class Main {
             list.add(new Country(id, gold, silver, bronze, 0));
         }
 
-        Collections.sort(list, new Comparator<Country>() {
-            @Override
-            public int compare(Country c1, Country c2) {
-                if (c1.gold == c2.gold) {
-                    if (c1.silver == c2.silver) {
-                        return c2.bronze - c1.bronze;
-                    }
-                    return c2.silver - c1.silver;
-                }
-                return c2.gold - c1.gold;
-            }
-        });
-
+        Collections.sort(list);
         list.get(0).rank = 1;
 
         int idx = 0;
 
-        for (int i = 1; i < n; i++) {
-            if (list.get(i).gold != list.get(i-1).gold || list.get(i).silver != list.get(i-1).silver || list.get(i).bronze != list.get(i-1).bronze) {
-                list.get(i).rank = list.get(i-1).rank + 1;
-            } else {
-                list.get(i).rank = list.get(i-1).rank;
-            }
-            if (list.get(i).id == m) {
+        for (int i = 1; i < list.size(); i++) {
+            Country prevCountry = list.get(i - 1);
+            Country nowCountry = list.get(i);
+
+            nowCountry.rank = nowCountry.compareTo(prevCountry) == 0
+                    ? prevCountry.rank
+                    : i + 1;
+
+            if (nowCountry.id == m) {
                 idx = i;
             }
         }
-
         System.out.println(list.get(idx).rank);
     }
 }
 
-class Country {
+class Country implements Comparable<Country> {
     int id,gold,silver,bronze, rank;
     public Country(int id, int gold, int silver, int bronze, int rank) {
         this.id = id;
@@ -60,5 +49,18 @@ class Country {
         this.silver = silver;
         this.bronze = bronze;
         this.rank = rank;
+    }
+
+    @Override
+    public int compareTo(Country c) {
+        if (this.gold == c.gold) {
+            if (this.silver == c.silver) {
+                return c.bronze - this.bronze;
+            } else {
+                return c.silver - this.silver;
+            }
+        } else {
+            return c.gold - this.gold;
+        }
     }
 }
