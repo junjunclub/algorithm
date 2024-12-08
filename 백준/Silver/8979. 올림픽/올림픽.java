@@ -34,12 +34,14 @@ public class Main {
         });
 
         list.get(0).rank = 1;
-        
+
         int idx = 0;
-        
+
         for (int i = 1; i < n; i++) {
             if (list.get(i).gold != list.get(i-1).gold || list.get(i).silver != list.get(i-1).silver || list.get(i).bronze != list.get(i-1).bronze) {
                 list.get(i).rank = list.get(i-1).rank + 1;
+            } else {
+                list.get(i).rank = list.get(i-1).rank;
             }
             if (list.get(i).id == m) {
                 idx = i;
