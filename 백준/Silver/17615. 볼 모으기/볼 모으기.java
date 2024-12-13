@@ -11,7 +11,6 @@ public class Main {
         String balls = br.readLine();
 
         char lastColor;
-
         lastColor = balls.charAt(n-1);
 
         int lCCnt = 0;
@@ -28,6 +27,25 @@ public class Main {
             }
         }
 
-        System.out.println(Math.min(lCCnt, nLCCnt));
+        char firstColor;
+
+        firstColor = balls.charAt(0);
+
+        int fCCnt = 0;
+        int nFCCnt = 0;
+
+        flag = false;
+
+        for (int i = 0; i < n; i++) {
+            if (balls.charAt(i) == firstColor && flag) {
+                fCCnt++;
+            } else if (balls.charAt(i) != firstColor) {
+                nFCCnt++;
+                flag = true;
+            }
+        }
+        int minFC = Math.min(fCCnt, nFCCnt);
+        int minLC = Math.min(lCCnt, nLCCnt);
+        System.out.println(Math.min(minFC, minLC));
     }
 }
