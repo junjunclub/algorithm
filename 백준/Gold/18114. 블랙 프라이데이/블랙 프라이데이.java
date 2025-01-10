@@ -17,16 +17,16 @@ public class Main {
         ArrayList<Integer> list = new ArrayList<>();
         for(int i = 0; i < N; i++) {
             list.add(Integer.parseInt(st.nextToken()));
-            
+
             // 물건이 하나일 때
             if(list.get(i) == C) {
                 System.out.println(1);
                 return;
             }
         }
-        
+
         Collections.sort(list);
-        
+
         int s = 0, e = N-1, weight;
         while(s < e) {
             weight = list.get(s) + list.get(e);
@@ -38,9 +38,11 @@ public class Main {
                 return;
             }
             else {
-                if(list.indexOf(C-weight) < e && list.indexOf(C-weight) > s){
-                    System.out.println(1);
-                    return;
+                for (int mid = s + 1; mid < e; mid++) {
+                    if (weight + list.get(mid) == C) {
+                        System.out.println(1);
+                        return;
+                    }
                 }
                 s++;
             }
