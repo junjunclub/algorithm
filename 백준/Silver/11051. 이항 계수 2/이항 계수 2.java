@@ -33,6 +33,6 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
-        dp = new int[N+1][N+1];
+        dp = new int[N+1][K+1];
     }
 }
