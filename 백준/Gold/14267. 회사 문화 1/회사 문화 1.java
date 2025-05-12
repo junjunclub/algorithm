@@ -16,9 +16,9 @@ public class Main {
 
     private static void solve() {
         praise(1, 0);
-        
+
         StringBuilder sb = new StringBuilder();
-        
+
         for (int i = 1; i <= N; i++) {
             sb.append(res[i]).append(" ");
         }
@@ -42,12 +42,12 @@ public class Main {
         arr = new int[N + 1];
         res = new int[N + 1];
         emp = new ArrayList[N + 1];
+        
         for (int i = 1; i <= N; i++) {
             emp[i] = new ArrayList<>();
         }
 
         st = new StringTokenizer(br.readLine());
-
         for (int i = 1; i <= N; i++) {
             int num = Integer.parseInt(st.nextToken());
             if (i >= 2) {
