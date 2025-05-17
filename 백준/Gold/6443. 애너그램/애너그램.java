@@ -1,53 +1,65 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.stream.Collectors;
- 
- 
+
 public class Main {
- 
-    static int n;
-    static int[] check;
-    static Stack<Character> stack =new Stack<>();
-    static PriorityQueue<String> queue = new PriorityQueue<>();
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
- 
-        StringBuilder sb = new StringBuilder();
-        for(int i=0; i<n; i++){
-            char[] chars = br.readLine().toCharArray();
-            int length = chars.length;
-            check = new int[26];
-            for(char now: chars){
-                check[now-'a']++;
+    static int N;
+    static String[] arr;
+    static StringBuilder sb;
+    static int[] visited;
+    static Stack<Character> stack = new Stack<>();
+    static List<String> list = new ArrayList<>();
+    public static void main(String[] args) throws Exception{
+            init();
+            solve();
+        }
+
+    private static void solve() {
+        sb = new StringBuilder();
+        for (int i = 0; i < N; i++) {
+            visited = new int[26];
+            list = new ArrayList<>();
+            for (int j = 0; j < arr[i].length(); j++) {
+                visited[arr[i].charAt(j) - 'a']++;
             }
-            dfs(chars,length);
-            while(!queue.isEmpty()){
-                sb.append(queue.poll()).append("\n");
+            backTracking(arr[i].length(), 0);
+            Collections.sort(list);
+            for (String s : list) {
+                sb.append(s).append("\n");
             }
         }
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
- 
-    private static void dfs(char [] s, int limit) {
-        if(limit== stack.size()){
-            StringBuilder sb = new StringBuilder();
-            for(char now: stack){
-                sb.append(now);
+
+    private static void backTracking(int n, int depth) {
+        if (depth == n) {
+            StringBuilder stb = new StringBuilder();
+            for (char c : stack) {
+                stb.append(c);
             }
-            queue.add(sb.toString());
+            list.add(stb.toString());
+            return;
         }
- 
-        for(int i=0; i<26; i++){
-            if(check[i]>0){
-                check[i]--;
-                stack.push((char)(i+'a'));
-                dfs(s,limit);
+
+        for (int i = 0; i < 26; i++) {
+            if (visited[i] > 0) {
+                visited[i]--;
+                stack.push((char) (i + 'a'));
+                backTracking(n, depth+1);
                 stack.pop();
-                check[i]++;
+                visited[i]++;
             }
+        }
+    }
+
+    private static void init() throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+
+        arr = new String[N];
+
+        for (int i = 0; i < N; i++) {
+            arr[i] = br.readLine();
         }
     }
 }
