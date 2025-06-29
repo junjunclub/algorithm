@@ -10,14 +10,13 @@ public class Main {
         }
 
     private static void solve() {
-        int num = Integer.parseInt(str, 2);
-        int cnt = 0;
-        while (true) {
-            if (num == 0) break;
-            cnt++;
-            num = num - (num & ((~num) + 1));
+        int answer = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '1') {
+                answer++;
+            }
         }
-        System.out.println(cnt);
+        System.out.println(answer);
     }
 
     private static void init() throws Exception{
