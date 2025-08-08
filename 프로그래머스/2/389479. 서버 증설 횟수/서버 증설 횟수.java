@@ -1,26 +1,29 @@
 import java.util.*;
+
 class Solution {
     public int solution(int[] players, int m, int k) {
-        Queue<Integer> q = new LinkedList<>();
-        int answer = 0;
-        for (int i = 0; i < 24; i++) {
-            int need = players[i] / m;
-            
-            while (!q.isEmpty() && q.peek() <= i) {
-                q.poll();
+        PriorityQueue<Integer> expirationTimes = new PriorityQueue<>();
+        int totalServers = 0;
+
+        for (int hour = 0; hour < 24; hour++) {
+            int requiredServers = players[hour] / m;
+
+            // 만료된 서버 제거
+            while (!expirationTimes.isEmpty() && expirationTimes.peek() <= hour) {
+                expirationTimes.poll();
             }
-            
-            int current = q.size();
-            
-            if (need > current) {
-                int newServer = need - current;
-                
-                for (int j = 0; j < newServer; j++) {
-                    q.add(i + k);
-                    answer++;
+
+            int runningServers = expirationTimes.size();
+
+            // 부족한 서버 추가
+            if (requiredServers > runningServers) {
+                int serversToAdd = requiredServers - runningServers;
+                for (int s = 0; s < serversToAdd; s++) {
+                    expirationTimes.add(hour + k);
                 }
+                totalServers += serversToAdd;
             }
         }
-        return answer;
+        return totalServers;
     }
 }
