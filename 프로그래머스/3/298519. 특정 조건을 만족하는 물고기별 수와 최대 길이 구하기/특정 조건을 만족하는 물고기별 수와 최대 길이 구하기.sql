@@ -1,0 +1,56 @@
+-- 코드를 작성해주세요
+# SELECT
+#     COUNT(*), FISH_TYPE, SUM(LENGTH)
+# FROM
+#     FISH_INFO F
+# GROUP BY
+#     F.FISH_TYPE;
+
+# SELECT
+#     F.ID, F.FISH_TYPE, 
+#     CASE
+#         WHEN F.LENGTH <= 10 THEN 10
+#         WHEN F.LENGTH IS NULL THEN 10
+#         ELSE F.LENGTH
+#     END AS LENGTH
+# FROM
+#     FISH_INFO F;
+    
+SELECT
+    COUNT(*) AS FISH_COUNT, MAX(I.LENGTH) AS MAX_LENGTH, I.FISH_TYPE AS FISH_TYPE
+FROM
+    (SELECT
+        F.ID, F.FISH_TYPE, 
+        CASE
+            WHEN F.LENGTH <= 10 THEN 10
+            WHEN F.LENGTH IS NULL THEN 10
+            ELSE F.LENGTH
+        END AS LENGTH
+    FROM
+        FISH_INFO F) I
+GROUP BY
+    I.FISH_TYPE
+HAVING
+    AVG(I.LENGTH) >= 33
+ORDER BY
+    FISH_TYPE ASC;
+    
+
+
+# SELECT
+#     COUNT(*) AS FISH_COUNT,
+#     SUM(F.LENGTH) AS MAX_LENGTH,
+#     F.FISH_TYPE
+# FROM
+#     (SELECT
+#         I.ID, I.FISH_TYPE,
+#         CASE
+#             WHEN I.LENGTH <= 10 THEN 10
+#             ELSE I.LENGTH
+#         END AS LENGTH
+#     FROM
+#         FISH_INFO I) F
+# GROUP BY
+#     F.FISH_TYPE
+# HAVING
+#     ;
